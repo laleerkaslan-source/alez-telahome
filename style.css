@@ -1950,6 +1950,56 @@ img {
   text-align: center;
 }
 
+/* ===== Checkout Methods ===== */
+.checkout-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.checkout-method {
+  background: var(--white);
+  border: 2px solid var(--gray-light);
+  border-radius: 12px;
+  padding: 28px 24px;
+  transition: border-color 0.3s;
+}
+
+.checkout-method:hover {
+  border-color: var(--brown-light);
+}
+
+.checkout-method h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: var(--dark);
+}
+
+.checkout-method p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+#cardPayLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .checkout-methods {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
 /* ===== Buy Now Button ===== */
 .btn-buy-now {
   display: flex;
