@@ -1950,6 +1950,34 @@ img {
   text-align: center;
 }
 
+/* ===== Buy Now Button ===== */
+.btn-buy-now {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #2D2A26, #4A4540);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 12px;
+}
+
+.btn-buy-now:hover {
+  background: linear-gradient(135deg, #4A4540, #2D2A26);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
 .article-cta h3 {
   color: var(--dark) !important;
   margin-top: 0 !important;

@@ -134,6 +134,11 @@
             </button>
           </div>
 
+          <a href="https://panel.qnbpay.com.tr/payment-link/pay/7O0xUwmbXlaYEAB6" class="btn btn-buy-now" id="buyNowBtn" target="_blank" rel="noopener" style="display:none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Hemen Satın Al - Kredi Kartı ile Öde
+          </a>
+
           <div class="pd-added-msg" id="addedMsg">
             Ürün sepete eklendi! <a href="sepet.html">Sepete Git</a>
           </div>
@@ -254,6 +259,9 @@
     }
 
     const prices = { '100x200': 750, '160x200': 850, '180x200': 950, '200x200': 1100 };
+    const paymentLinks = {
+      '100x200': 'https://panel.qnbpay.com.tr/payment-link/pay/7O0xUwmbXlaYEAB6'
+    };
     let selectedSize = null, selectedPrice = 750;
 
     function selectSize(btn) {
@@ -262,6 +270,13 @@
       selectedSize = btn.dataset.size;
       selectedPrice = parseInt(btn.dataset.price);
       document.getElementById('currentPrice').textContent = selectedPrice.toLocaleString('tr-TR') + ' TL';
+      const buyBtn = document.getElementById('buyNowBtn');
+      if (paymentLinks[selectedSize]) {
+        buyBtn.href = paymentLinks[selectedSize];
+        buyBtn.style.display = 'flex';
+      } else {
+        buyBtn.style.display = 'none';
+      }
     }
 
     function changeQty(delta) {
