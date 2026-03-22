@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cerez Politikasi | Tela Home</title>
+  <meta name="description" content="Tela Home Cerez Politikasi - Web sitemizde kullanilan cerezler hakkinda bilgilendirme.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header scrolled" id="header">
+    <div class="container header-inner">
+      <a href="/" class="logo"><img src="logo.svg" alt="Tela Home"></a>
+      <nav class="nav" id="nav"><a href="/" class="nav-link">Urun</a><a href="/blog.html" class="nav-link">Blog</a></nav>
+      <div class="header-actions"><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div>
+    </div>
+  </header>
+
+  <div class="breadcrumb"><div class="container"><a href="/">Urun</a><span>/</span><strong>Cerez Politikasi</strong></div></div>
+
+  <article class="blog-article">
+    <div class="container">
+      <div class="article-content legal-content">
+        <h1>Cerez (Cookie) Politikasi</h1>
+        <p><strong>Son guncelleme:</strong> 22 Mart 2026</p>
+
+        <h2>Cerez Nedir?</h2>
+        <p>Cerezler, web sitelerinin tarayiciniza gonderip cihazinizda depoladigi kucuk metin dosyalaridir. Cerezler, web sitesinin duzgun calismasini saglamak, kullanici deneyimini iyilestirmek ve ziyaretci istatistiklerini toplamak amaciyla kullanilmaktadir.</p>
+
+        <h2>Kullanilan Cerez Turleri</h2>
+
+        <h3>Zorunlu Cerezler</h3>
+        <p>Web sitesinin temel islevlerinin calisabilmesi icin gerekli cerezlerdir. Bu cerezler olmadan site duzgun calismaz.</p>
+        <table class="pd-specs-table">
+          <tr><td><strong>Cerez</strong></td><td><strong>Amac</strong></td><td><strong>Sure</strong></td></tr>
+          <tr><td>telaCart</td><td>Sepet bilgilerinin saklanmasi (localStorage)</td><td>Tarayici kapanana kadar</td></tr>
+        </table>
+
+        <h3>Analitik Cerezler</h3>
+        <p>Ziyaretci sayisi, sayfa goruntulenmeleri ve site kullanim aliskanliklari gibi istatistiksel bilgileri toplamak icin kullanilir. Bu veriler anonim olarak toplanir.</p>
+
+        <h3>Pazarlama Cerezleri</h3>
+        <p>Reklam ve pazarlama amacli cerezlerdir. Ziyaretcilerin ilgi alanlarini belirleyerek kisisellestirilmis reklam gostermek icin kullanilabilir.</p>
+
+        <h2>Ucuncu Taraf Cerezleri</h2>
+        <p>Web sitemizde asagidaki ucuncu taraf hizmetleri kullanilabilir:</p>
+        <ul>
+          <li><strong>Google Fonts:</strong> Yazi tipi yuklemesi icin</li>
+          <li><strong>QNBPay:</strong> Odeme islemi sirasinda guvenli odeme sayfasinda</li>
+        </ul>
+
+        <h2>Cerezleri Yonetme</h2>
+        <p>Tarayicinizin ayarlarindan cerezleri kabul etmeyi veya reddetmeyi secebilirsiniz. Cerezleri devre disi birakmaniz halinde web sitesinin bazi ozellikleri duzgun calismayabilir.</p>
+        <p>Cerez ayarlarini degistirmek icin tarayicinizin ayarlar bolumunu kullanabilirsiniz:</p>
+        <ul>
+          <li><strong>Chrome:</strong> Ayarlar > Gizlilik ve Guvenlik > Cerezler</li>
+          <li><strong>Firefox:</strong> Ayarlar > Gizlilik ve Guvenlik</li>
+          <li><strong>Safari:</strong> Tercihler > Gizlilik</li>
+          <li><strong>Edge:</strong> Ayarlar > Cerezler ve Site Izinleri</li>
+        </ul>
+
+        <h2>Iletisim</h2>
+        <p>Cerez politikamiz hakkinda sorulariniz icin <strong>+90 506 397 73 07</strong> numarasindan bizimle iletisime gecebilirsiniz.</p>
+      </div>
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><a href="/" class="logo"><img src="logo.svg" alt="Tela Home"></a><p>Kaliteli ve uygun fiyatli ev tekstili.</p></div>
+      <div class="footer-links"><h4>Sayfalar</h4><a href="/">Ürün</a><a href="/blog.html">Blog</a></div>
+      <div class="footer-links"><h4>Bilgi</h4><a href="/mesafeli-satis-sozlesmesi.html">Mesafeli Satış Sözleşmesi</a><a href="/iade-sartlari.html">İade Şartları</a><a href="/kvkk.html">KVKK</a><a href="/cerez-politikasi.html">Çerez Politikası</a></div>
+      <div class="footer-contact"><h4>Iletisim</h4><p>Umitkoy / Ankara</p><p><a href="tel:+905063977307">+90 506 397 73 07</a></p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tela Home. Tum haklari saklidir.</p></div>
+  </footer>
+  <script>document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });</script>
+</body>
+</html>
