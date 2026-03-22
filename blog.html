@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alez Blog - Yatak Koruyucu Rehberi | Tela Home</title>
+  <meta name="description" content="Alez hakkında bilmeniz gereken her şey. Alez nedir, nasıl seçilir, nasıl yıkanır? Yatak koruyucu rehberi.">
+  <link rel="canonical" href="https://alez.telahome.store/blog.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header scrolled" id="header">
+    <div class="container header-inner">
+      <a href="/" class="logo"><img src="logo.svg" alt="Tela Home"></a>
+      <nav class="nav" id="nav">
+        <a href="/" class="nav-link">Ürün</a>
+        <a href="/blog.html" class="nav-link">Blog</a>
+        <a href="https://telahome.store" class="nav-link">Tela Home</a>
+      </nav>
+      <div class="header-actions">
+        <a href="sepet.html" class="header-cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg><span class="cart-count" id="cartCount">0</span></a>
+        <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="blog-page">
+    <div class="container">
+      <h1 class="blog-title">Alez Rehberi</h1>
+      <p class="blog-subtitle">Yatak koruyucu hakkında bilmeniz gereken her şey</p>
+
+      <div class="blog-grid">
+        <a href="blog/alez-nedir.html" class="blog-card">
+          <div class="blog-card-icon">🛏️</div>
+          <h2>Alez Nedir? Ne İşe Yarar?</h2>
+          <p>Alez, yatağınızı sıvı, leke ve alerjenlerden koruyan bir yatak koruyucudur. Bebek yatağından çift kişilik yatağa kadar her yatak için gereklidir.</p>
+          <span class="blog-read">Devamını Oku →</span>
+        </a>
+
+        <a href="blog/alez-nasil-yikanir.html" class="blog-card">
+          <div class="blog-card-icon">🧼</div>
+          <h2>Alez Nasıl Yıkanır?</h2>
+          <p>Alezinizin ömrünü uzatmak için doğru yıkama ve bakım yöntemlerini öğrenin. Sıcaklık, deterjan ve kurutma tavsiyeleri.</p>
+          <span class="blog-read">Devamını Oku →</span>
+        </a>
+
+        <a href="blog/alez-nasil-secilir.html" class="blog-card">
+          <div class="blog-card-icon">✅</div>
+          <h2>Alez Nasıl Seçilir?</h2>
+          <p>Doğru alez seçimi için dikkat etmeniz gereken kumaş tipi, su geçirmezlik, nefes alabilirlik ve ebat kriterleri.</p>
+          <span class="blog-read">Devamını Oku →</span>
+        </a>
+
+        <a href="blog/alez-bebek-yatagi.html" class="blog-card">
+          <div class="blog-card-icon">👶</div>
+          <h2>Bebek Yatağında Alez Neden Şart?</h2>
+          <p>Bebek yataklarında hijyen, sıvı koruması ve alerjen bariyeri olarak alez kullanımının önemi.</p>
+          <span class="blog-read">Devamını Oku →</span>
+        </a>
+
+        <a href="blog/fitted-alez-nedir.html" class="blog-card">
+          <div class="blog-card-icon">📐</div>
+          <h2>Fitted Alez Nedir? Farkı Ne?</h2>
+          <p>Fitted (lastikli) alez ile düz alez arasındaki farklar, avantajlar ve hangi durumda hangisini tercih etmelisiniz.</p>
+          <span class="blog-read">Devamını Oku →</span>
+        </a>
+
+        <a href="blog/alez-ebat-rehberi.html" class="blog-card">
+          <div class="blog-card-icon">📏</div>
+          <h2>Alez Ebat Rehberi</h2>
+          <p>100x200, 160x200, 180x200, 200x200... Yatağınıza uygun alez ebadını nasıl belirlersiniz?</p>
+          <span class="blog-read">Devamını Oku →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><a href="/" class="logo"><img src="logo.svg" alt="Tela Home"></a><p>Kaliteli ve uygun fiyatlı ev tekstili.</p></div>
+      <div class="footer-links"><h4>Sayfalar</h4><a href="/">Ürün</a><a href="/blog.html">Blog</a></div>
+      <div class="footer-contact"><h4>İletişim</h4><p>Ümitköy / Ankara</p><p><a href="tel:+905063977307">+90 506 397 73 07</a></p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tela Home. Tüm hakları saklıdır.</p></div>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script>document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });</script>
+</body>
+</html>
