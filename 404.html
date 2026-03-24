@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K295N30TQV"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K295N30TQV');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Sayfa Bulunamadı - Tela Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .error-page { display: flex; align-items: center; justify-content: center; min-height: 80vh; text-align: center; padding: 2rem; }
+    .error-content h1 { font-family: 'Montserrat', sans-serif; font-size: 5rem; font-weight: 800; color: var(--primary, #2d5a3d); margin: 0; }
+    .error-content h2 { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 600; color: #333; margin: 0.5rem 0 1rem; }
+    .error-content p { font-family: 'Open Sans', sans-serif; color: #666; margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .error-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .error-links a { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s; }
+    .error-links a:hover { opacity: 0.85; }
+    .error-link-primary { background: var(--primary, #2d5a3d); color: #fff; }
+    .error-link-secondary { background: #f0f0f0; color: #333; }
+  </style>
+</head>
+<body>
+  <header class="header scrolled" id="header">
+    <div class="container header-inner">
+      <a href="/" class="logo"><img src="logo.svg" alt="Tela Home"></a>
+      <nav class="nav" id="nav">
+        <a href="/" class="nav-link">Ürün</a>
+        <a href="/blog.html" class="nav-link">Blog</a>
+        <a href="https://telahome.store" class="nav-link">Tela Home</a>
+      </nav>
+      <div class="header-actions">
+        <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="error-page">
+    <div class="error-content">
+      <h1>404</h1>
+      <h2>Sayfa Bulunamadı</h2>
+      <p>Aradığınız sayfa kaldırılmış, adı değiştirilmiş veya geçici olarak kullanım dışı olabilir.</p>
+      <div class="error-links">
+        <a href="/" class="error-link-primary">Ana Sayfaya Dön</a>
+        <a href="/blog.html" class="error-link-secondary">Blog'a Git</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><a href="/" class="logo"><img src="logo.svg" alt="Tela Home"></a><p>Kaliteli ve uygun fiyatlı ev tekstili.</p></div>
+      <div class="footer-links"><h4>Sayfalar</h4><a href="/">Ürün</a><a href="/blog.html">Blog</a></div>
+      <div class="footer-links"><h4>Bilgi</h4><a href="/mesafeli-satis-sozlesmesi.html">Mesafeli Satış Sözleşmesi</a><a href="/iade-sartlari.html">İade Şartları</a><a href="/kvkk.html">KVKK</a><a href="/cerez-politikasi.html">Çerez Politikası</a></div>
+      <div class="footer-contact"><h4>İletişim</h4><p>Ümitköy / Ankara</p><p><a href="tel:+905063977307">+90 506 397 73 07</a></p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tela Home. Tüm hakları saklıdır.</p></div>
+  </footer>
+
+  <script>document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });</script>
+</body>
+</html>

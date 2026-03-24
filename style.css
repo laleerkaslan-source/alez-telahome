@@ -1942,6 +1942,33 @@ img {
   margin-bottom: 6px;
 }
 
+.related-articles {
+  margin-top: 48px;
+  padding: 24px 0;
+  border-top: 1px solid var(--gray-light);
+}
+.related-articles h2 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+.related-articles ul {
+  list-style: none;
+  padding: 0;
+}
+.related-articles li {
+  margin-bottom: 10px;
+}
+.related-articles a {
+  color: var(--brown-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.related-articles a:hover {
+  color: var(--green-dark);
+  text-decoration: underline;
+}
+
 .article-cta {
   margin-top: 48px;
   padding: 32px;
