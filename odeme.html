@@ -74,6 +74,7 @@
   <script src="cart.js"></script>
   <script>
     document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });
+    (function(){var h=document.getElementById('header'),s=200,e=600;window.addEventListener('scroll',function(){var y=window.scrollY;h.style.opacity=y<=s?'1':y>=e?'0.3':String(1-0.7*((y-s)/(e-s)));});})();
     const paymentLinks = {
       '100x200': 'https://panel.qnbpay.com.tr/payment-link/pay/7O0xUwmbXlaYEAB6',
       '160x200': 'https://panel.qnbpay.com.tr/payment-link/pay/l4f8H2QNeDpqbOzH',

@@ -138,6 +138,7 @@
     </div>
     <div class="footer-bottom"><p>&copy; 2026 Tela Home. Tüm hakları saklıdır.</p></div>
   </footer>
-  <script>document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });</script>
+  <script>document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });
+  (function(){var h=document.getElementById('header'),s=200,e=600;window.addEventListener('scroll',function(){var y=window.scrollY;h.style.opacity=y<=s?'1':y>=e?'0.3':String(1-0.7*((y-s)/(e-s)));});})();</script>
 </body>
 </html>
