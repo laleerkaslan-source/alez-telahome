@@ -459,9 +459,10 @@
     });
 
     // Size buttons stagger
-    gsap.from('.size-btn', {
-      y: 20,
-      opacity: 0,
+    gsap.set('.size-btn', { opacity: 0, y: 20 });
+    gsap.to('.size-btn', {
+      opacity: 1,
+      y: 0,
       duration: 0.4,
       stagger: 0.1,
       ease: 'power2.out',
@@ -470,9 +471,10 @@
     });
 
     // Badges stagger fade in
-    gsap.from('.pd-badge', {
-      y: 15,
-      opacity: 0,
+    gsap.set('.pd-badge', { opacity: 0, y: 15 });
+    gsap.to('.pd-badge', {
+      opacity: 1,
+      y: 0,
       duration: 0.4,
       stagger: 0.1,
       ease: 'power2.out',
