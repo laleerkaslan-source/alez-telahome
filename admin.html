@@ -195,6 +195,8 @@
 
   <script>
     var SCRIPT_URL_KEY = 'telaAdminScriptUrl';
+    var DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywnKJc5e_1jDFwSc5Aj7mYMC-oe-dPpXW_Fs0P_mt65rNnN_u8lcnqIMemN0JQaq_pGw/exec';
+    if (!localStorage.getItem(SCRIPT_URL_KEY)) localStorage.setItem(SCRIPT_URL_KEY, DEFAULT_SCRIPT_URL);
     var PASSWORD = 'telahome2026';
     var allOrders = [];
 
