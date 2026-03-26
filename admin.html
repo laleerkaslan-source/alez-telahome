@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | Tela Home</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --beige:#F4EFEA; --brown:#8B6F5A; --brown-dark:#6B5443; --green:#7AA67A;
+      --bg:#F7F7F7; --white:#fff; --dark:#2D2A26; --gray:#6B6B6B;
+      --gray-light:#E8E8E8; --shadow:0 2px 16px rgba(0,0,0,0.06); --radius:12px;
+    }
+    body { font-family:'Open Sans',sans-serif; background:var(--bg); color:var(--dark); min-height:100vh; }
+    h1,h2,h3,h4 { font-family:'Montserrat',sans-serif; }
+
+    /* Login */
+    .login-page { display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; }
+    .login-box { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:40px; max-width:400px; width:100%; text-align:center; }
+    .login-box img { height:40px; margin-bottom:24px; }
+    .login-box h2 { margin-bottom:8px; color:var(--brown); font-size:1.3rem; }
+    .login-box p { color:var(--gray); font-size:0.9rem; margin-bottom:24px; }
+    .login-box input { width:100%; padding:12px 16px; border:1px solid var(--gray-light); border-radius:8px; font-size:1rem; margin-bottom:16px; outline:none; }
+    .login-box input:focus { border-color:var(--brown); }
+    .login-box button { width:100%; padding:12px; background:var(--brown); color:var(--white); border:none; border-radius:8px; font-size:1rem; font-weight:600; cursor:pointer; }
+    .login-box button:hover { background:var(--brown-dark); }
+    .login-error { color:#e74c3c; font-size:0.85rem; margin-top:8px; display:none; }
+
+    /* Dashboard */
+    .dashboard { display:none; }
+    .admin-header { background:var(--white); box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+    .admin-header img { height:32px; }
+    .admin-header-right { display:flex; align-items:center; gap:12px; }
+    .admin-header-right span { color:var(--gray); font-size:0.85rem; }
+    .btn-logout { padding:8px 16px; background:none; border:1px solid var(--gray-light); border-radius:8px; color:var(--gray); cursor:pointer; font-size:0.85rem; }
+    .btn-logout:hover { border-color:var(--brown); color:var(--brown); }
+
+    .admin-content { max-width:1200px; margin:0 auto; padding:24px; }
+
+    /* Stats */
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:16px; margin-bottom:32px; }
+    .stat-card { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; }
+    .stat-card .stat-label { font-size:0.85rem; color:var(--gray); margin-bottom:4px; }
+    .stat-card .stat-value { font-size:1.8rem; font-weight:700; font-family:'Montserrat',sans-serif; color:var(--brown); }
+    .stat-card .stat-sub { font-size:0.8rem; color:var(--gray); margin-top:4px; }
+
+    /* Filters */
+    .filters { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; align-items:center; }
+    .filters input, .filters select { padding:8px 12px; border:1px solid var(--gray-light); border-radius:8px; font-size:0.9rem; outline:none; }
+    .filters input:focus, .filters select:focus { border-color:var(--brown); }
+    .btn-refresh { padding:8px 16px; background:var(--brown); color:var(--white); border:none; border-radius:8px; cursor:pointer; font-size:0.9rem; font-weight:600; }
+    .btn-refresh:hover { background:var(--brown-dark); }
+
+    /* Table */
+    .table-wrapper { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow-x:auto; }
+    .orders-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+    .orders-table th { background:var(--beige); padding:12px 16px; text-align:left; font-family:'Montserrat',sans-serif; font-weight:600; color:var(--brown-dark); white-space:nowrap; position:sticky; top:0; }
+    .orders-table td { padding:10px 16px; border-bottom:1px solid var(--gray-light); white-space:nowrap; }
+    .orders-table tr:hover td { background:#faf8f6; }
+    .orders-table .status-yeni { background:#e8f5e9; color:#2e7d32; padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+    .orders-table .status-hazirlaniyor { background:#fff3e0; color:#e65100; padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+    .orders-table .status-kargoda { background:#e3f2fd; color:#1565c0; padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+    .orders-table .status-tamamlandi { background:var(--gray-light); color:var(--gray); padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+
+    .no-data { text-align:center; padding:60px 20px; color:var(--gray); }
+    .no-data svg { margin-bottom:16px; opacity:0.3; }
+    .loading { text-align:center; padding:60px 20px; color:var(--gray); }
+
+    /* Setup */
+    .setup-box { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:32px; margin-bottom:24px; }
+    .setup-box h3 { color:var(--brown); margin-bottom:12px; }
+    .setup-box p { color:var(--gray); font-size:0.9rem; line-height:1.6; margin-bottom:12px; }
+    .setup-box input { width:100%; padding:10px 14px; border:1px solid var(--gray-light); border-radius:8px; font-size:0.9rem; margin-bottom:12px; }
+    .setup-box button { padding:10px 20px; background:var(--green); color:var(--white); border:none; border-radius:8px; cursor:pointer; font-weight:600; }
+    .setup-box button:hover { background:#5E8A5E; }
+
+    @media(max-width:768px) {
+      .admin-content { padding:16px; }
+      .stats-grid { grid-template-columns:1fr 1fr; }
+      .orders-table { font-size:0.78rem; }
+      .orders-table th, .orders-table td { padding:8px 10px; }
+    }
+    @media(max-width:480px) {
+      .stats-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <div class="login-page" id="loginPage">
+    <div class="login-box">
+      <img src="logo.svg" alt="Tela Home">
+      <h2>Admin Panel</h2>
+      <p>Siparişlerinizi ve müşteri bilgilerinizi görüntüleyin.</p>
+      <input type="password" id="passwordInput" placeholder="Şifre" autofocus>
+      <button onclick="doLogin()">Giriş Yap</button>
+      <p class="login-error" id="loginError">Şifre yanlış. Tekrar deneyin.</p>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <div class="admin-header">
+      <a href="/"><img src="logo.svg" alt="Tela Home"></a>
+      <div class="admin-header-right">
+        <span>Admin Panel</span>
+        <button class="btn-logout" onclick="doLogout()">Çıkış</button>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <!-- Setup Notice -->
+      <div class="setup-box" id="setupBox" style="display:none;">
+        <h3>Google Apps Script URL'sini Girin</h3>
+        <p>Google Sheets + Apps Script kurulumunu tamamladıktan sonra web uygulaması URL'sini buraya yapıştırın. URL, <code>https://script.google.com/macros/s/...</code> şeklinde olmalıdır.</p>
+        <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec">
+        <button onclick="saveScriptUrl()">Kaydet</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-label">Toplam Sipariş</div>
+          <div class="stat-value" id="statTotal">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Toplam Gelir</div>
+          <div class="stat-value" id="statRevenue">-</div>
+          <div class="stat-sub">TL</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Yeni Siparişler</div>
+          <div class="stat-value" id="statNew">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Kampanya Onaylı</div>
+          <div class="stat-value" id="statKampanya">-</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <input type="text" id="searchInput" placeholder="Ad, telefon veya adres ara..." style="flex:1;min-width:200px;">
+        <select id="statusFilter">
+          <option value="">Tüm Durumlar</option>
+          <option value="Yeni">Yeni</option>
+          <option value="Hazırlanıyor">Hazırlanıyor</option>
+          <option value="Kargoda">Kargoda</option>
+          <option value="Tamamlandı">Tamamlandı</option>
+        </select>
+        <select id="sizeFilter">
+          <option value="">Tüm Ebatlar</option>
+          <option value="100x200">100x200</option>
+          <option value="160x200">160x200</option>
+          <option value="180x200">180x200</option>
+          <option value="200x200">200x200</option>
+        </select>
+        <button class="btn-refresh" onclick="loadOrders()">Yenile</button>
+      </div>
+
+      <!-- Orders Table -->
+      <div class="table-wrapper">
+        <div class="loading" id="loadingMsg">Siparişler yükleniyor...</div>
+        <table class="orders-table" id="ordersTable" style="display:none;">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Tarih</th>
+              <th>Ad Soyad</th>
+              <th>Telefon</th>
+              <th>Adres</th>
+              <th>E-posta</th>
+              <th>Ebat</th>
+              <th>Adet</th>
+              <th>Fiyat</th>
+              <th>Kampanya</th>
+              <th>Durum</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody"></tbody>
+        </table>
+        <div class="no-data" id="noData" style="display:none;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          <p>Henüz sipariş yok.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var SCRIPT_URL_KEY = 'telaAdminScriptUrl';
+    var PASSWORD = 'telahome2026';
+    var allOrders = [];
+
+    // Login
+    document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doLogin();
+    });
+
+    function doLogin() {
+      var pw = document.getElementById('passwordInput').value;
+      if (pw === PASSWORD) {
+        sessionStorage.setItem('telaAdmin', '1');
+        showDashboard();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    }
+
+    function doLogout() {
+      sessionStorage.removeItem('telaAdmin');
+      location.reload();
+    }
+
+    function showDashboard() {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      var url = localStorage.getItem(SCRIPT_URL_KEY);
+      if (!url) {
+        document.getElementById('setupBox').style.display = 'block';
+        document.getElementById('loadingMsg').style.display = 'none';
+        document.getElementById('noData').style.display = 'block';
+      } else {
+        loadOrders();
+      }
+    }
+
+    function saveScriptUrl() {
+      var url = document.getElementById('scriptUrlInput').value.trim();
+      if (!url || !url.startsWith('https://script.google.com/')) {
+        alert('Geçerli bir Google Apps Script URL\'si girin.');
+        return;
+      }
+      localStorage.setItem(SCRIPT_URL_KEY, url);
+      document.getElementById('setupBox').style.display = 'none';
+      loadOrders();
+    }
+
+    // Load orders
+    function loadOrders() {
+      var url = localStorage.getItem(SCRIPT_URL_KEY);
+      if (!url) return;
+
+      document.getElementById('loadingMsg').style.display = 'block';
+      document.getElementById('ordersTable').style.display = 'none';
+      document.getElementById('noData').style.display = 'none';
+
+      fetch(url + '?password=' + PASSWORD)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          document.getElementById('loadingMsg').style.display = 'none';
+          if (data.success && data.orders) {
+            allOrders = data.orders;
+            updateStats();
+            renderOrders();
+          } else {
+            document.getElementById('noData').style.display = 'block';
+            document.getElementById('noData').querySelector('p').textContent = data.error || 'Veri alınamadı.';
+          }
+        })
+        .catch(function(err) {
+          document.getElementById('loadingMsg').style.display = 'none';
+          document.getElementById('noData').style.display = 'block';
+          document.getElementById('noData').querySelector('p').textContent = 'Bağlantı hatası: ' + err.message;
+        });
+    }
+
+    // Stats
+    function updateStats() {
+      document.getElementById('statTotal').textContent = allOrders.length;
+      var revenue = 0;
+      var newCount = 0;
+      var kampanyaCount = 0;
+      allOrders.forEach(function(o) {
+        var fiyat = parseFloat(String(o['Fiyat'] || '0').replace(/[^0-9.,]/g, '').replace(',', '.'));
+        var adet = parseInt(o['Adet']) || 1;
+        revenue += fiyat * adet;
+        if (o['Durum'] === 'Yeni') newCount++;
+        if (o['Kampanya Onay'] === 'Evet') kampanyaCount++;
+      });
+      document.getElementById('statRevenue').textContent = revenue.toLocaleString('tr-TR');
+      document.getElementById('statNew').textContent = newCount;
+      document.getElementById('statKampanya').textContent = kampanyaCount;
+    }
+
+    // Render
+    function renderOrders() {
+      var search = document.getElementById('searchInput').value.toLowerCase();
+      var statusF = document.getElementById('statusFilter').value;
+      var sizeF = document.getElementById('sizeFilter').value;
+
+      var filtered = allOrders.filter(function(o) {
+        if (statusF && o['Durum'] !== statusF) return false;
+        if (sizeF && (o['Ebat'] || '').indexOf(sizeF) === -1) return false;
+        if (search) {
+          var haystack = (o['Ad'] + ' ' + o['Soyad'] + ' ' + o['Telefon'] + ' ' + o['Adres'] + ' ' + o['E-posta']).toLowerCase();
+          if (haystack.indexOf(search) === -1) return false;
+        }
+        return true;
+      });
+
+      var tbody = document.getElementById('ordersBody');
+      if (filtered.length === 0) {
+        document.getElementById('ordersTable').style.display = 'none';
+        document.getElementById('noData').style.display = 'block';
+        document.getElementById('noData').querySelector('p').textContent = 'Eşleşen sipariş bulunamadı.';
+        return;
+      }
+
+      document.getElementById('ordersTable').style.display = 'table';
+      document.getElementById('noData').style.display = 'none';
+
+      var html = '';
+      filtered.reverse().forEach(function(o, i) {
+        var durum = o['Durum'] || 'Yeni';
+        var statusClass = 'status-' + durum.toLowerCase().replace('ı', 'i').replace('ö', 'o');
+        html += '<tr>' +
+          '<td>' + (filtered.length - i) + '</td>' +
+          '<td>' + (o['Tarih'] || '-') + '</td>' +
+          '<td>' + (o['Ad'] || '') + ' ' + (o['Soyad'] || '') + '</td>' +
+          '<td><a href="tel:' + (o['Telefon'] || '') + '">' + (o['Telefon'] || '-') + '</a></td>' +
+          '<td style="white-space:normal;max-width:200px;">' + (o['Adres'] || '-') + '</td>' +
+          '<td>' + (o['E-posta'] || '-') + '</td>' +
+          '<td>' + (o['Ebat'] || '-') + '</td>' +
+          '<td>' + (o['Adet'] || 1) + '</td>' +
+          '<td>' + (o['Fiyat'] || '-') + ' TL</td>' +
+          '<td>' + (o['Kampanya Onay'] || '-') + '</td>' +
+          '<td><span class="' + statusClass + '">' + durum + '</span></td>' +
+          '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    // Filters
+    document.getElementById('searchInput').addEventListener('input', renderOrders);
+    document.getElementById('statusFilter').addEventListener('change', renderOrders);
+    document.getElementById('sizeFilter').addEventListener('change', renderOrders);
+
+    // Auto-login check
+    if (sessionStorage.getItem('telaAdmin') === '1') {
+      showDashboard();
+    }
+  </script>
+</body>
+</html>

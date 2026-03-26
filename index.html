@@ -470,6 +470,8 @@
       if (e.target === this) closeCargoModal();
     });
 
+    var APPS_SCRIPT_URL = localStorage.getItem('telaAdminScriptUrl') || '';
+
     function submitCargoForm(e) {
       e.preventDefault();
       var form = document.getElementById('cargoForm');
@@ -481,6 +483,22 @@
       var eposta = document.getElementById('cargoEposta').value;
       var kampanya = document.getElementById('kampanyaOnay').checked;
       var qty = document.getElementById('qtyInput').value;
+
+      // Save order to Google Sheets
+      if (APPS_SCRIPT_URL) {
+        fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            ad: ad, soyad: soyad, telefon: tel, adres: adres,
+            eposta: eposta, urun: 'Sıvı Geçirmez Alez',
+            ebat: selectedSize, adet: parseInt(qty),
+            fiyat: selectedPrice, kampanya: kampanya
+          })
+        }).catch(function(){});
+      }
+
       var waMsg = 'Yeni Sipariş:%0A' +
         'Ürün: Sıvı Geçirmez Alez ' + selectedSize + '%0A' +
         'Adet: ' + qty + '%0A' +
