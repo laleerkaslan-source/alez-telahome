@@ -238,7 +238,7 @@
             </button>
           </div>
 
-          <a href="https://panel.qnbpay.com.tr/payment-link/pay/lMm7NSxR82yGP0yl" class="btn btn-buy-now" id="buyNowBtn" target="_blank" rel="noopener" style="display:none;">
+          <a href="#" class="btn btn-buy-now" id="buyNowBtn" onclick="openCargoModal(event)" style="display:none;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
             Hemen Satın Al - Kredi Kartı ile Öde
           </a>
@@ -356,6 +356,55 @@
     <span>WhatsApp ile Sor</span>
   </a>
 
+  <!-- Kargo Bilgi Formu Modal -->
+  <div class="cargo-modal-overlay" id="cargoModal">
+    <div class="cargo-modal">
+      <button class="cargo-modal-close" onclick="closeCargoModal()">&times;</button>
+      <h2 class="cargo-modal-title">Kargo Bilgileri</h2>
+      <p class="cargo-modal-desc">Siparişinizin tarafınıza ulaştırılabilmesi için lütfen aşağıdaki bilgileri doldurunuz.</p>
+      <form id="cargoForm" onsubmit="return submitCargoForm(event)">
+        <div class="cargo-form-row">
+          <div class="cargo-form-group">
+            <label for="cargoAd">Ad <span class="required">*</span></label>
+            <input type="text" id="cargoAd" name="ad" required placeholder="Adınız">
+          </div>
+          <div class="cargo-form-group">
+            <label for="cargoSoyad">Soyad <span class="required">*</span></label>
+            <input type="text" id="cargoSoyad" name="soyad" required placeholder="Soyadınız">
+          </div>
+        </div>
+        <div class="cargo-form-group">
+          <label for="cargoTel">Telefon <span class="required">*</span></label>
+          <input type="tel" id="cargoTel" name="telefon" required placeholder="05XX XXX XX XX" pattern="[0-9]{10,11}">
+        </div>
+        <div class="cargo-form-group">
+          <label for="cargoAdres">Adres <span class="required">*</span></label>
+          <textarea id="cargoAdres" name="adres" required placeholder="Teslimat adresinizi yazınız" rows="3"></textarea>
+        </div>
+        <div class="cargo-form-group">
+          <label for="cargoEposta">E-posta</label>
+          <input type="email" id="cargoEposta" name="eposta" placeholder="E-posta adresiniz (isteğe bağlı)">
+        </div>
+        <p class="cargo-info-text">Bu bilgiler yalnızca kargo gönderimi amacıyla kullanılacak olup tarafımızca işlenmemektedir.</p>
+        <div class="cargo-checkbox-group">
+          <label class="cargo-checkbox">
+            <input type="checkbox" id="kvkkOnay" required>
+            <span class="checkmark"></span>
+            <span><a href="/kvkk.html" target="_blank">KVKK Aydınlatma Metni</a>'ni okudum, kişisel verilerimin kargo gönderimi için kullanılmasını kabul ediyorum. <span class="required">*</span></span>
+          </label>
+        </div>
+        <div class="cargo-checkbox-group">
+          <label class="cargo-checkbox">
+            <input type="checkbox" id="kampanyaOnay">
+            <span class="checkmark"></span>
+            <span>Kampanya ve güncellemelerden haberdar olmak için ad, soyad, telefon ve e-posta bilgilerimin saklanmasını ve kullanılmasını kabul ediyorum.</span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary cargo-submit-btn">Ödemeye Devam Et</button>
+      </form>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="cart.js"></script>
@@ -399,11 +448,53 @@
       document.getElementById('currentPrice').textContent = selectedPrice.toLocaleString('tr-TR') + ' TL';
       const buyBtn = document.getElementById('buyNowBtn');
       if (paymentLinks[selectedSize]) {
-        buyBtn.href = paymentLinks[selectedSize];
         buyBtn.style.display = 'flex';
       } else {
         buyBtn.style.display = 'none';
       }
+    }
+
+    function openCargoModal(e) {
+      e.preventDefault();
+      if (!selectedSize) { alert('Lütfen bir ebat seçiniz.'); return; }
+      document.getElementById('cargoModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCargoModal() {
+      document.getElementById('cargoModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('cargoModal').addEventListener('click', function(e) {
+      if (e.target === this) closeCargoModal();
+    });
+
+    function submitCargoForm(e) {
+      e.preventDefault();
+      var form = document.getElementById('cargoForm');
+      if (!form.checkValidity()) { form.reportValidity(); return false; }
+      var ad = document.getElementById('cargoAd').value;
+      var soyad = document.getElementById('cargoSoyad').value;
+      var tel = document.getElementById('cargoTel').value;
+      var adres = document.getElementById('cargoAdres').value;
+      var eposta = document.getElementById('cargoEposta').value;
+      var kampanya = document.getElementById('kampanyaOnay').checked;
+      var qty = document.getElementById('qtyInput').value;
+      var waMsg = 'Yeni Sipariş:%0A' +
+        'Ürün: Sıvı Geçirmez Alez ' + selectedSize + '%0A' +
+        'Adet: ' + qty + '%0A' +
+        'Fiyat: ' + selectedPrice + ' TL%0A' +
+        'Ad Soyad: ' + ad + ' ' + soyad + '%0A' +
+        'Telefon: ' + tel + '%0A' +
+        'Adres: ' + adres +
+        (eposta ? '%0AE-posta: ' + eposta : '') +
+        (kampanya ? '%0AKampanya onayı: Evet' : '');
+      var waUrl = 'https://wa.me/905063977307?text=' + waMsg;
+      window.open(waUrl, '_blank');
+      closeCargoModal();
+      window.open(paymentLinks[selectedSize], '_blank');
+      return false;
     }
 
     function changeQty(delta) {
