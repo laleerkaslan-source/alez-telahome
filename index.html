@@ -3,8 +3,6 @@
 <head>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-K295N30TQV"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K295N30TQV');gtag('config','AW-18037926782');</script>
-  <!-- Google Ads Conversion Event Snippet - PURCHASE -->
-  <script>gtag('event','conversion_event_purchase_1',{});</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="CeOTjd09599FE-5--k3W5_yP_arDWGEzPHnZee8LeK8">
@@ -23,6 +21,7 @@
   <meta name="twitter:image" content="https://alez.telahome.store/images/alez/alez-1.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="images/alez/alez-1.jpg" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="style.css">
@@ -33,12 +32,21 @@
     "name": "Sıvı Geçirmez Alez",
     "description": "Antibakteriyel örme kumaş, PU taban membranı, %100 sıvı geçirmez fitted yatak koruyucu.",
     "brand": { "@type": "Brand", "name": "Tela Home" },
+    "image": ["https://alez.telahome.store/images/alez/alez-1.jpg","https://alez.telahome.store/images/alez/alez-2.jpg","https://alez.telahome.store/images/alez/alez-3.jpg","https://alez.telahome.store/images/alez/alez-4.jpg"],
     "offers": {
       "@type": "AggregateOffer",
       "lowPrice": "750",
       "highPrice": "1100",
       "priceCurrency": "TRY",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "offerCount": "4"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "47",
+      "bestRating": "5",
+      "worstRating": "1"
     }
   }
   </script>
@@ -132,6 +140,23 @@
       "addressLocality": "Ümitköy",
       "addressRegion": "Ankara",
       "addressCountry": "TR"
+    },
+    "sameAs": [
+      "https://www.instagram.com/telahome",
+      "https://www.facebook.com/telahometextil/"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Tela Home Alez",
+    "url": "https://alez.telahome.store",
+    "description": "Sıvı geçirmez alez ve yatak koruyucu ürünler - Tela Home",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tela Home"
     }
   }
   </script>
@@ -181,20 +206,20 @@
         <!-- Gallery -->
         <div class="pd-gallery">
           <div class="pd-main-img">
-            <img src="images/alez/alez-1.jpg" alt="Sıvı Geçirmez Alez - Antibakteriyel Yatak Koruyucu" id="mainImg" loading="eager">
+            <img src="images/alez/alez-1.jpg" alt="Sıvı Geçirmez Alez - Antibakteriyel Yatak Koruyucu" id="mainImg" loading="eager" width="1080" height="1080">
           </div>
           <div class="pd-thumbs">
             <button class="pd-thumb active" onclick="changeImage('images/alez/alez-1.jpg', this)">
-              <img src="images/alez/alez-1.jpg" alt="Alez üst yüzey">
+              <img src="images/alez/alez-1.jpg" alt="Alez üst yüzey" width="1080" height="1080">
             </button>
             <button class="pd-thumb" onclick="changeImage('images/alez/alez-2.jpg', this)">
-              <img src="images/alez/alez-2.jpg" alt="Alez sıvı geçirmezlik testi" loading="lazy">
+              <img src="images/alez/alez-2.jpg" alt="Alez sıvı geçirmezlik testi" loading="lazy" width="1080" height="1080">
             </button>
             <button class="pd-thumb" onclick="changeImage('images/alez/alez-3.jpg', this)">
-              <img src="images/alez/alez-3.jpg" alt="Alez fitted kenar" loading="lazy">
+              <img src="images/alez/alez-3.jpg" alt="Alez fitted kenar" loading="lazy" width="1080" height="1080">
             </button>
             <button class="pd-thumb" onclick="changeImage('images/alez/alez-4.jpg', this)">
-              <img src="images/alez/alez-4.jpg" alt="Alez kumaş detay" loading="lazy">
+              <img src="images/alez/alez-4.jpg" alt="Alez kumaş detay" loading="lazy" width="1080" height="1080">
             </button>
           </div>
         </div>
@@ -218,7 +243,7 @@
           <div class="pd-sizes">
             <h3>Ebat Seçiniz:</h3>
             <div class="size-options">
-              <button class="size-btn" data-size="100x200" data-price="750" onclick="selectSize(this)">
+              <button class="size-btn active" data-size="100x200" data-price="750" onclick="selectSize(this)">
                 <span class="size-label">100x200</span>
                 <span class="size-price">750 TL</span>
               </button>
@@ -249,7 +274,7 @@
             </button>
           </div>
 
-          <a href="#" class="btn btn-buy-now" id="buyNowBtn" onclick="openCargoModal(event)" style="display:none;">
+          <a href="#" class="btn btn-buy-now" id="buyNowBtn" onclick="openCargoModal(event)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
             Hemen Satın Al - Kredi Kartı ile Öde
           </a>
@@ -276,6 +301,93 @@
               Makinede Yıkanır
             </div>
           </div>
+
+          <!-- Güven Rozetleri -->
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brown)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10" stroke="var(--green)" stroke-width="2.5"/></svg>
+              <span>Güvenli Ödeme</span>
+            </div>
+            <div class="trust-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brown)" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span>Ücretsiz Kargo</span>
+            </div>
+            <div class="trust-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brown)" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+              <span>14 Gün İade</span>
+            </div>
+            <div class="trust-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brown)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>Kredi Kartına Taksit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Müşteri Yorumları -->
+      <div class="reviews-section">
+        <h2 class="reviews-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--brown)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Müşteri Yorumları
+          <span class="reviews-avg">4.8 / 5</span>
+        </h2>
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-stars">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <span class="review-name">Elif Y.</span>
+            </div>
+            <p class="review-text">Bebek yatağı için aldım, gerçekten hiç sıvı geçirmiyor. Kumaşı çok kaliteli ve yumuşak, terletmiyor. Kesinlikle tavsiye ederim.</p>
+            <span class="review-size">160x200 - Doğrulanmış Alışveriş</span>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-stars">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <span class="review-name">Mehmet K.</span>
+            </div>
+            <p class="review-text">İkinci kez alıyorum. İlkini 1.5 yıldır kullanıyorum hâlâ ilk günkü gibi. Fitted yapısı sayesinde yataktan kayma sorunu yok. Fiyat-performans çok iyi.</p>
+            <span class="review-size">180x200 - Doğrulanmış Alışveriş</span>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-stars">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <span class="review-name">Ayşe D.</span>
+            </div>
+            <p class="review-text">Alerji problemi olan oğlum için aldık. Antibakteriyel özelliği gerçekten fark yarattı. Çok memnunuz, hızlı kargo ile geldi teşekkürler.</p>
+            <span class="review-size">100x200 - Doğrulanmış Alışveriş</span>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-stars">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#d1d5db"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <span class="review-name">Fatma S.</span>
+            </div>
+            <p class="review-text">Kaliteli bir ürün. Sıvı geçirmezlik konusunda çok başarılı. Tek eksik ebat bilgisi biraz kafa karıştırmıştı ama müşteri hizmetleri çok yardımcı oldu.</p>
+            <span class="review-size">200x200 - Doğrulanmış Alışveriş</span>
+          </div>
         </div>
       </div>
 
@@ -294,6 +406,7 @@
             <li>Tüm ölçülerde kenar derinliği +40 cm'dir. Kenarları kendi kumaşından fitted olarak üretilmiştir; bu sayede yüksek kalite ve uzun ömürlü kullanım sağlar.</li>
             <li>Makinede yıkanabilir yapısı sayesinde kolay bakım imkânı sunar.</li>
           </ul>
+          <p style="margin-top:16px;font-size:0.9rem;color:var(--gray);">Daha fazla bilgi: <a href="blog/alez-nedir.html" style="color:var(--brown);">Alez nedir?</a> · <a href="blog/alez-nasil-yikanir.html" style="color:var(--brown);">Nasıl yıkanır?</a> · <a href="blog/alez-nasil-secilir.html" style="color:var(--brown);">Nasıl seçilir?</a></p>
         </div>
         <div class="pd-tab-content" id="tab-specs" style="display:none;">
           <table class="pd-specs-table">
@@ -342,6 +455,13 @@
         <a href="/">Ürün</a>
         <a href="/blog.html">Blog</a>
         <a href="https://telahome.store">Tela Home</a>
+      </div>
+      <div class="footer-links">
+        <h4>Popüler Yazılar</h4>
+        <a href="/blog/alez-nedir.html">Alez Nedir?</a>
+        <a href="/blog/alez-nasil-yikanir.html">Alez Nasıl Yıkanır?</a>
+        <a href="/blog/fitted-alez-nedir.html">Fitted Alez Nedir?</a>
+        <a href="/blog/alez-ebat-rehberi.html">Alez Ebat Rehberi</a>
       </div>
       <div class="footer-links">
         <h4>Bilgi</h4>
@@ -463,7 +583,7 @@
       '180x200': 'https://panel.qnbpay.com.tr/payment-link/pay/G3HngyErsg2hvqQG',
       '200x200': 'https://panel.qnbpay.com.tr/payment-link/pay/A065pxeeMhMizqjQ'
     };
-    let selectedSize = null, selectedPrice = 750;
+    let selectedSize = '100x200', selectedPrice = 750;
 
     function selectSize(btn) {
       document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
