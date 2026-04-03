@@ -1859,8 +1859,8 @@ img {
     align-items: center;
     padding: 28px 0;
     gap: 20px;
+    display: none;
     transform: translateY(-120%);
-    transition: transform 0.4s ease;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
     border-radius: 12px;
     pointer-events: none;
@@ -1878,6 +1878,7 @@ img {
   }
 
   .nav.open {
+    display: flex;
     transform: translateY(0);
     pointer-events: auto;
   }
