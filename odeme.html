@@ -55,8 +55,26 @@
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--brown)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
                 Kredi Kartı ile Öde
               </h3>
-              <p>QNBPay güvenli ödeme altyapısı ile kredi kartı veya banka kartı ile ödeme yapın.</p>
-              <div id="cardPayLinks"></div>
+              <p>iyzico güvenli ödeme altyapısı ile kredi kartı veya banka kartı ile ödeme yapın.</p>
+              <form id="buyerForm" style="display:flex;flex-direction:column;gap:10px;margin-top:12px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                  <input type="text" id="buyerName" placeholder="Ad *" required style="padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+                  <input type="text" id="buyerSurname" placeholder="Soyad *" required style="padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+                </div>
+                <input type="email" id="buyerEmail" placeholder="E-posta *" required style="padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+                <input type="tel" id="buyerPhone" placeholder="Telefon *" required style="padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+                <input type="text" id="buyerAddress" placeholder="Adres *" required style="padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                  <input type="text" id="buyerCity" placeholder="Şehir *" required style="padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+                  <input type="text" id="buyerZip" placeholder="Posta Kodu" style="padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+                </div>
+                <button type="submit" class="btn btn-buy-now" id="payBtn" style="margin-top:8px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                  Kredi Kartı ile Öde
+                </button>
+                <p id="payError" style="color:red;font-size:0.85rem;display:none;margin-top:4px;"></p>
+              </form>
+              <div id="iyzicoForm" style="margin-top:16px;"></div>
             </div>
 
             <div class="checkout-method">
@@ -107,56 +125,95 @@
   <script>
     document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });
     (function(){var h=document.getElementById('header'),s=200,e=600;window.addEventListener('scroll',function(){var y=window.scrollY;h.style.opacity=y<=s?'1':y>=e?'0.3':String(1-0.7*((y-s)/(e-s)));});})();
-    const paymentLinks = {
-      '100x200': 'https://panel.qnbpay.com.tr/payment-link/pay/lMm7NSxR82yGP0yl',
-      '160x200': 'https://panel.qnbpay.com.tr/payment-link/pay/taJg2DkRx8sfInPU',
-      '180x200': 'https://panel.qnbpay.com.tr/payment-link/pay/G3HngyErsg2hvqQG',
-      '200x200': 'https://panel.qnbpay.com.tr/payment-link/pay/A065pxeeMhMizqjQ'
-    };
-    const items = Cart.getItems(), orderDiv = document.getElementById('checkoutOrder'), waBtn = document.getElementById('waOrderBtn'), cardLinks = document.getElementById('cardPayLinks');
+
+    const WORKER_URL = 'https://telahome-pay.laleerkaslan.workers.dev';
+    const items = Cart.getItems(), orderDiv = document.getElementById('checkoutOrder'), waBtn = document.getElementById('waOrderBtn');
+
     if (items.length > 0) {
-      let html = '<h3>Siparis Detayi:</h3><ul>', waText = 'Merhaba, sipariş vermek istiyorum:%0A';
-      let total = 0, cardHtml = '';
+      let html = '<h3>Sipariş Detayı:</h3><ul>', waText = 'Merhaba, sipariş vermek istiyorum:%0A';
+      let total = 0;
       items.forEach(item => {
         html += `<li>${item.name} - ${item.size} x${item.qty} = ${(item.price*item.qty).toLocaleString('tr-TR')} TL</li>`;
         waText += `- ${item.name} ${item.size} x${item.qty} (${(item.price*item.qty).toLocaleString('tr-TR')} TL)%0A`;
-        total += item.price*item.qty;
-        const size = item.size;
-        if (paymentLinks[size]) {
-          cardHtml += `<a href="${paymentLinks[size]}" class="btn btn-buy-now" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>${item.name} ${size} - ${item.price.toLocaleString('tr-TR')} TL Ode</a>`;
-        }
+        total += item.price * item.qty;
       });
       html += `</ul><p style="font-weight:700;margin-top:8px;">Toplam: ${total.toLocaleString('tr-TR')} TL</p>`;
       waText += `Toplam: ${total.toLocaleString('tr-TR')} TL`;
       orderDiv.innerHTML = html;
       waBtn.href = `https://wa.me/905063977307?text=${waText}`;
-      cardLinks.innerHTML = cardHtml || '<p style="color:var(--gray);font-size:0.9rem;">Sepetinizdeki ürünler için online ödeme linki bulunamadı.</p>';
-      // Google Ads dönüşüm takibi - ödeme linklerine tıklandığında tetikle
-      cardLinks.querySelectorAll('a.btn-buy-now').forEach(function(link) {
-        link.addEventListener('click', function() {
-          gtag('event', 'conversion_event_purchase_1', { 'value': total, 'currency': 'TRY' });
-          gtag('event', 'purchase', {
-            'send_to': 'AW-18037926782',
-            'value': total,
-            'currency': 'TRY',
-            'transaction_id': 'T-' + Date.now()
-          });
-        });
-      });
+
+      // WhatsApp Google Ads dönüşüm takibi
       waBtn.addEventListener('click', function() {
         gtag('event', 'conversion_event_purchase_1', { 'value': total, 'currency': 'TRY' });
-        gtag('event', 'purchase', {
-          'send_to': 'AW-18037926782',
-          'value': total,
-          'currency': 'TRY',
-          'transaction_id': 'T-' + Date.now()
-        });
+        gtag('event', 'purchase', { 'send_to': 'AW-18037926782', 'value': total, 'currency': 'TRY', 'transaction_id': 'T-' + Date.now() });
       });
-      // begin_checkout event - sayfa yüklendiğinde
-      gtag('event', 'begin_checkout', {
-        'send_to': 'AW-18037926782',
-        'value': total,
-        'currency': 'TRY'
+
+      // begin_checkout event
+      gtag('event', 'begin_checkout', { 'send_to': 'AW-18037926782', 'value': total, 'currency': 'TRY' });
+
+      // iyzico ödeme formu
+      document.getElementById('buyerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const payBtn = document.getElementById('payBtn');
+        const payError = document.getElementById('payError');
+        payBtn.disabled = true;
+        payBtn.textContent = 'Ödeme formu yükleniyor...';
+        payError.style.display = 'none';
+
+        const buyer = {
+          name: document.getElementById('buyerName').value.trim(),
+          surname: document.getElementById('buyerSurname').value.trim(),
+          email: document.getElementById('buyerEmail').value.trim(),
+          phone: document.getElementById('buyerPhone').value.trim(),
+          address: document.getElementById('buyerAddress').value.trim(),
+          city: document.getElementById('buyerCity').value.trim(),
+          zipCode: document.getElementById('buyerZip').value.trim() || '06000'
+        };
+
+        const basketItems = items.map(item => ({
+          id: item.id,
+          name: item.name + ' ' + item.size,
+          price: item.price,
+          qty: item.qty
+        }));
+
+        try {
+          const res = await fetch(WORKER_URL + '/create-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              buyer: buyer,
+              items: basketItems,
+              callbackUrl: WORKER_URL + '/callback?returnUrl=' + encodeURIComponent(window.location.origin + '/odeme-sonuc.html')
+            })
+          });
+          const data = await res.json();
+          if (data.status === 'success' && data.checkoutFormContent) {
+            // Google Ads conversion tracking
+            gtag('event', 'conversion_event_purchase_1', { 'value': total, 'currency': 'TRY' });
+            gtag('event', 'purchase', { 'send_to': 'AW-18037926782', 'value': total, 'currency': 'TRY', 'transaction_id': data.conversationId || ('T-' + Date.now()) });
+            // iyzico checkout formunu göster
+            document.getElementById('buyerForm').style.display = 'none';
+            const iyzicoDiv = document.getElementById('iyzicoForm');
+            iyzicoDiv.innerHTML = data.checkoutFormContent;
+            // iyzico script'lerini çalıştır
+            iyzicoDiv.querySelectorAll('script').forEach(function(oldScript) {
+              var newScript = document.createElement('script');
+              if (oldScript.src) { newScript.src = oldScript.src; } else { newScript.textContent = oldScript.textContent; }
+              oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+          } else {
+            payError.textContent = data.message || data.error || 'Ödeme formu oluşturulamadı. Lütfen tekrar deneyin.';
+            payError.style.display = 'block';
+            payBtn.disabled = false;
+            payBtn.textContent = 'Kredi Kartı ile Öde';
+          }
+        } catch (err) {
+          payError.textContent = 'Bağlantı hatası. Lütfen tekrar deneyin.';
+          payError.style.display = 'block';
+          payBtn.disabled = false;
+          payBtn.textContent = 'Kredi Kartı ile Öde';
+        }
       });
     }
   </script>

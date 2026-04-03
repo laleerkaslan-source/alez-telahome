@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K295N30TQV"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K295N30TQV');gtag('config','AW-18037926782');</script>
+  <script type="text/javascript">
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w4svk7xnzn");
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odeme Sonucu | Tela Home Alez</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header scrolled" id="header">
+    <div class="container header-inner">
+      <a href="/" class="logo"><img src="logo.svg" alt="Tela Home"></a>
+      <nav class="nav" id="nav"><a href="/" class="nav-link">Urun</a><a href="sepet.html" class="nav-link">Sepetim</a><a href="https://punch.telahome.store" class="nav-link" target="_blank">Kirlent</a></nav>
+      <div class="header-actions">
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="checkout-page" style="min-height:60vh;display:flex;align-items:center;">
+    <div class="container" style="text-align:center;max-width:600px;">
+      <div id="resultLoading">
+        <div style="font-size:2rem;margin-bottom:16px;">&#8987;</div>
+        <h1 class="cart-title">Odeme Sonucu Kontrol Ediliyor...</h1>
+        <p>Lutfen bekleyin.</p>
+      </div>
+      <div id="resultSuccess" style="display:none;">
+        <div style="font-size:3rem;margin-bottom:16px;">&#10004;</div>
+        <h1 class="cart-title" style="color:#27ae60;">Odeme Basarili!</h1>
+        <p style="font-size:1.1rem;margin:16px 0;">Siparisiniz basariyla alindi. Tesekkur ederiz!</p>
+        <div id="paymentDetails" style="background:#f8f9fa;border-radius:12px;padding:20px;margin:20px 0;text-align:left;"></div>
+        <a href="/" class="btn btn-buy-now" style="margin-top:16px;">Alisverise Devam Et</a>
+      </div>
+      <div id="resultFail" style="display:none;">
+        <div style="font-size:3rem;margin-bottom:16px;">&#10060;</div>
+        <h1 class="cart-title" style="color:#e74c3c;">Odeme Basarisiz</h1>
+        <p style="font-size:1.1rem;margin:16px 0;" id="failMessage">Odeme islemi tamamlanamadi. Lutfen tekrar deneyin.</p>
+        <a href="odeme.html" class="btn btn-buy-now" style="margin-top:16px;">Tekrar Dene</a>
+        <a href="/" class="btn btn-outline" style="margin-top:8px;">Ana Sayfa</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><a href="/" class="logo"><img src="logo.svg" alt="Tela Home"></a><p>Kaliteli ve uygun fiyatli ev tekstili.</p></div>
+      <div class="footer-links"><h4>Sayfalar</h4><a href="/">Urun</a><a href="/blog.html">Blog</a></div>
+      <div class="footer-links"><h4>Bilgi</h4><a href="/mesafeli-satis-sozlesmesi.html">Mesafeli Satis Sozlesmesi</a><a href="/iade-sartlari.html">Iade Sartlari</a><a href="/kvkk.html">KVKK</a><a href="/cerez-politikasi.html">Cerez Politikasi</a></div>
+      <div class="footer-contact"><h4>Iletisim</h4><p>Omitkoy / Ankara</p><p><a href="tel:+905063977307">+90 506 397 73 07</a></p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Tela Home. Tum haklari saklidir.</p></div>
+  </footer>
+
+  <script>
+    document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });
+
+    const WORKER_URL = 'https://telahome-pay.laleerkaslan.workers.dev';
+
+    (async function() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+
+      if (!token) {
+        document.getElementById('resultLoading').style.display = 'none';
+        document.getElementById('resultFail').style.display = 'block';
+        document.getElementById('failMessage').textContent = 'Odeme bilgisi bulunamadi.';
+        return;
+      }
+
+      try {
+        const res = await fetch(WORKER_URL + '/check-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: token })
+        });
+        const data = await res.json();
+
+        document.getElementById('resultLoading').style.display = 'none';
+
+        if (data.status === 'SUCCESS') {
+          document.getElementById('resultSuccess').style.display = 'block';
+          let details = '';
+          if (data.paymentId) details += '<p><strong>Odeme No:</strong> ' + data.paymentId + '</p>';
+          if (data.paidPrice) details += '<p><strong>Odenen Tutar:</strong> ' + parseFloat(data.paidPrice).toLocaleString('tr-TR') + ' TL</p>';
+          if (data.cardType) details += '<p><strong>Kart Tipi:</strong> ' + data.cardType + '</p>';
+          if (data.lastFourDigits) details += '<p><strong>Kart Sonu:</strong> ****' + data.lastFourDigits + '</p>';
+          if (data.installment && data.installment > 1) details += '<p><strong>Taksit:</strong> ' + data.installment + '</p>';
+          document.getElementById('paymentDetails').innerHTML = details;
+
+          // Sepeti temizle
+          localStorage.removeItem('telaCart');
+
+          // Google Ads conversion
+          gtag('event', 'conversion_event_purchase_1', { 'value': parseFloat(data.paidPrice || 0), 'currency': 'TRY' });
+          gtag('event', 'purchase', { 'send_to': 'AW-18037926782', 'value': parseFloat(data.paidPrice || 0), 'currency': 'TRY', 'transaction_id': data.paymentId || ('T-' + Date.now()) });
+        } else {
+          document.getElementById('resultFail').style.display = 'block';
+        }
+      } catch (err) {
+        document.getElementById('resultLoading').style.display = 'none';
+        document.getElementById('resultFail').style.display = 'block';
+        document.getElementById('failMessage').textContent = 'Baglanti hatasi. Lutfen daha sonra tekrar deneyin.';
+      }
+    })();
+  </script>
+</body>
+</html>
