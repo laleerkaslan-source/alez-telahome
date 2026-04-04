@@ -188,7 +188,16 @@
     </div>
     <div class="footer-bottom"><p>&copy; 2026 Tela Home. Tüm hakları saklıdır.</p></div>
   </footer>
+  <!-- Sticky CTA Bar -->
+  <div id="stickyCta" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:linear-gradient(135deg,#6B5443,#8B6F5A);padding:12px 20px;box-shadow:0 -4px 20px rgba(0,0,0,0.15);">
+    <div style="max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+      <div style="color:#fff;font-size:0.9rem;"><strong>Tela Home Alez</strong> — Sıvı geçirmez, %100 pamuk yüzey. 349 TL'den başlayan fiyatlarla.</div>
+      <a href="/" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:#6B5443;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:0.9rem;white-space:nowrap;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Ürünü İncele</a>
+    </div>
+  </div>
   <script>document.getElementById('hamburger').addEventListener('click', function() { this.classList.toggle('active'); document.getElementById('nav').classList.toggle('open'); });
-  (function(){var h=document.getElementById('header'),s=200,e=600;window.addEventListener('scroll',function(){var y=window.scrollY;h.style.opacity=y<=s?'1':y>=e?'0.3':String(1-0.7*((y-s)/(e-s)));});})();</script>
+  (function(){var h=document.getElementById('header'),s=200,e=600;window.addEventListener('scroll',function(){var y=window.scrollY;h.style.opacity=y<=s?'1':y>=e?'0.3':String(1-0.7*((y-s)/(e-s)));});})();
+  // Show sticky CTA after scrolling 40% of page
+  (function(){var bar=document.getElementById('stickyCta');if(!bar)return;var shown=false;window.addEventListener('scroll',function(){if(shown)return;if(window.scrollY>document.body.scrollHeight*0.3){bar.style.display='block';bar.style.animation='slideUp 0.4s ease';shown=true;}});var style=document.createElement('style');style.textContent='@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}';document.head.appendChild(style);})();</script>
 </body>
 </html>
