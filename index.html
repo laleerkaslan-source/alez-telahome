@@ -636,7 +636,40 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-  <script src="cart.js"></script>
+  <script src="https://telahome.store/shared-cart.js"></script>
+  <script>
+    // Cart wrapper using SharedCart bridge
+    const Cart = {
+      _items: [],
+      getItems() { return this._items; },
+      save(items) { this._items = items; SharedCart.setItems(items); this.updateCount(); },
+      add(item) {
+        if (!item.source) item.source = 'alez';
+        const existing = this._items.find(i => i.id === item.id && i.source === item.source);
+        if (existing) { existing.qty += item.qty; }
+        else { this._items.push(item); }
+        SharedCart.setItems(this._items);
+        this.updateCount();
+      },
+      updateCount() {
+        const total = this._items.reduce((s, i) => s + i.qty, 0);
+        document.querySelectorAll('.cart-count').forEach(el => {
+          el.textContent = total;
+          el.style.display = total > 0 ? 'flex' : 'none';
+        });
+      },
+      init() {
+        SharedCart.init(() => {
+          SharedCart.getItems().then(items => {
+            this._items = items || [];
+            this.updateCount();
+            if (typeof updateStickyCart === 'function') updateStickyCart();
+          });
+        });
+      }
+    };
+    Cart.init();
+  </script>
   <script>
     document.getElementById('hamburger').addEventListener('click', function() {
       this.classList.toggle('active');

@@ -9,24 +9,8 @@
 </head>
 <body>
   <p style="text-align:center;padding:60px 20px;font-family:sans-serif;color:#666;">Sepete yönlendiriliyorsunuz...</p>
-  <script src="cart.js"></script>
   <script>
-    const items = Cart.getItems();
-    if (items.length > 0) {
-      const cartData = items.map(item => ({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        image: item.image || '',
-        size: item.size || '',
-        qty: item.qty,
-        source: 'alez'
-      }));
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(cartData))));
-      window.location.href = 'https://telahome.store/sepet.html?import=' + encodeURIComponent(encoded);
-    } else {
-      window.location.href = 'https://telahome.store/sepet.html';
-    }
+    window.location.href = 'https://telahome.store/sepet.html';
   </script>
 </body>
 </html>
