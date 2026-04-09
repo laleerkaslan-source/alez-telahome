@@ -853,12 +853,11 @@
       if (!selectedSize) { alert('Lütfen bir ebat seçiniz.'); return; }
       var qty = parseInt(document.getElementById('qtyInput').value);
       Cart.add({ id: 'alez-' + selectedSize, name: 'Sıvı Geçirmez Alez', size: selectedSize, price: selectedPrice, qty: qty, image: 'images/alez/alez-1.jpg' });
-      // Google Ads sepete ekleme takibi
+      // GA4 + Google Ads sepete ekleme takibi
       gtag('event', 'add_to_cart', {
-        'send_to': 'AW-18037926782',
         'value': selectedPrice * qty,
         'currency': 'TRY',
-        'items': [{ 'id': 'alez-' + selectedSize, 'name': 'Sıvı Geçirmez Alez', 'price': selectedPrice, 'quantity': qty }]
+        'items': [{ 'item_id': 'alez-' + selectedSize, 'item_name': 'Sıvı Geçirmez Alez', 'price': selectedPrice, 'quantity': qty, 'item_category': 'Alez' }]
       });
       document.getElementById('cartPopupDetail').textContent = selectedSize + ' - ' + selectedPrice.toLocaleString('tr-TR') + ' TL × ' + qty;
       document.getElementById('cartPopupOverlay').classList.add('show');
