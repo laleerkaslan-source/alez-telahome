@@ -1119,9 +1119,14 @@ img {
 
 .pd-price-area {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 14px;
+}
+
+.pd-price-area .pd-price {
+  white-space: nowrap;
 }
 
 .pd-price {
@@ -1129,6 +1134,123 @@ img {
   font-size: 1.8rem;
   font-weight: 800;
   color: var(--brown-dark);
+}
+
+.pd-price-hint {
+  font-size: 0.85rem;
+  color: #888;
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+.pd-price-area:hover .pd-price {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.pd-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #f7f4ef;
+  color: #5c4a3a;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+@keyframes pulseHighlight {
+  0% { box-shadow: 0 0 0 0 rgba(139, 111, 90, 0.4); }
+  70% { box-shadow: 0 0 0 14px rgba(139, 111, 90, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(139, 111, 90, 0); }
+}
+
+.article-top-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #f7f4ef 0%, #ebe3d8 100%);
+  border: 1px solid #d4c4b0;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin: 20px 0 28px;
+  box-shadow: 0 2px 10px rgba(139, 111, 90, 0.08);
+}
+
+.article-top-cta .atc-img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.article-top-cta .atc-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.article-top-cta .atc-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2d2d2d;
+}
+
+.article-top-cta .atc-meta {
+  font-size: 0.82rem;
+  color: #6b5443;
+  font-weight: 500;
+}
+
+.article-top-cta .atc-btn {
+  background: #6B5443;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 11px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.article-top-cta .atc-btn:hover {
+  background: #8B6F5A;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 540px) {
+  .article-top-cta {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .article-top-cta .atc-img {
+    width: 56px;
+    height: 56px;
+  }
+  .article-top-cta .atc-info {
+    flex: 1 0 calc(100% - 70px);
+  }
+  .article-top-cta .atc-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
 }
 
 .pd-shipping {

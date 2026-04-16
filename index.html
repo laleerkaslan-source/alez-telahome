@@ -315,12 +315,19 @@
           <h1 class="pd-title">Sıvı Geçirmez Alez</h1>
           <p class="pd-subtitle">Antibakteriyel Fitted Yatak Koruyucu</p>
 
-          <div class="pd-price-area">
+          <div class="pd-price-area" onclick="scrollToSizes()" style="cursor:pointer" title="Ebat seçmek için tıklayın">
             <span class="pd-price" id="currentPrice">750 TL</span>
-            <span class="pd-shipping" data-tip="Tüm siparişlerde Türkiye geneli ücretsiz kargo. 1-3 iş günü içinde teslim.">
+            <span class="pd-price-hint">'den başlayan fiyatlarla</span>
+            <span class="pd-shipping" data-tip="Tüm siparişlerde Türkiye geneli ücretsiz kargo. 1-3 iş günü içinde teslim." onclick="event.stopPropagation()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
               Kargo Bedava
             </span>
+          </div>
+          <div class="pd-trust-row">
+            <span class="trust-pill">✓ %100 Sıvı Geçirmez</span>
+            <span class="trust-pill">✓ Antibakteriyel</span>
+            <span class="trust-pill">⭐ 4.8/5 (47 yorum)</span>
+            <span class="trust-pill">🚚 1-3 gün kargo</span>
           </div>
 
           <div class="pd-divider"></div>
@@ -788,6 +795,15 @@
       '200x200': 'https://panel.qnbpay.com.tr/payment-link/pay/A065pxeeMhMizqjQ'
     };
     let selectedSize = '100x200', selectedPrice = 750;
+
+    function scrollToSizes() {
+      var el = document.querySelector('.pd-sizes');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.animation = 'pulseHighlight 0.8s ease';
+        setTimeout(function(){ el.style.animation = ''; }, 900);
+      }
+    }
 
     function selectSize(btn) {
       document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
