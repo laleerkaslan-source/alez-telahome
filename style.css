@@ -1166,6 +1166,39 @@ img {
   padding: 6px 12px;
   border-radius: 20px;
   white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.trust-pill:hover {
+  background: #ebe3d8;
+  transform: translateY(-1px);
+}
+
+.clickable-area {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.clickable-area:hover {
+  color: var(--brown-dark, #6B5443);
+}
+
+.click-ripple {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: rgba(139, 111, 90, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  animation: clickRipple 0.6s ease-out;
+}
+
+@keyframes clickRipple {
+  0% { width: 0; height: 0; opacity: 0.7; }
+  100% { width: 80px; height: 80px; opacity: 0; }
 }
 
 @keyframes pulseHighlight {
