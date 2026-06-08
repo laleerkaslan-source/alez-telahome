@@ -6,6 +6,10 @@
   <script type="text/javascript">
   (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w4svk7xnzn");
   </script>
+  <!-- Meta Pixel Code -->
+  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1263032575973750');fbq('track','PageView');</script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1263032575973750&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="CeOTjd09599FE-5--k3W5_yP_arDWGEzPHnZee8LeK8">
@@ -1051,6 +1055,15 @@
         (kampanya ? '%0AKampanya onayı: Evet' : '');
       var waUrl = 'https://wa.me/905063977307?text=' + waMsg;
       window.open(waUrl, '_blank');
+      // Meta Pixel InitiateCheckout event
+      if (typeof fbq === 'function') {
+        fbq('track', 'InitiateCheckout', {
+          content_ids: ['alez-' + selectedSize],
+          content_name: 'Sıvı Geçirmez Alez',
+          value: selectedPrice,
+          currency: 'TRY'
+        });
+      }
       closeCargoModal();
       window.open(paymentLinks[selectedSize], '_blank');
       return false;
@@ -1074,6 +1087,16 @@
         'currency': 'TRY',
         'items': [{ 'item_id': 'alez-' + selectedSize, 'item_name': 'Sıvı Geçirmez Alez', 'price': selectedPrice, 'quantity': qty, 'item_category': 'Alez' }]
       });
+      // Meta Pixel AddToCart event
+      if (typeof fbq === 'function') {
+        fbq('track', 'AddToCart', {
+          content_ids: ['alez-' + selectedSize],
+          content_name: 'Sıvı Geçirmez Alez',
+          content_type: 'product',
+          value: selectedPrice * qty,
+          currency: 'TRY'
+        });
+      }
       document.getElementById('cartPopupDetail').textContent = selectedSize + ' - ' + selectedPrice.toLocaleString('tr-TR') + ' TL × ' + qty;
       document.getElementById('cartPopupOverlay').classList.add('show');
       document.getElementById('cartPopup').classList.add('show');
